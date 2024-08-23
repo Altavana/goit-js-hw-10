@@ -2,6 +2,8 @@
 import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
+import img1Url from '/img/success.svg';
+import img2Url from '/img/xmark.svg';
 
 const inputDelay = document.querySelector("input[name='delay']");
 inputDelay.classList.add('delay-input');
@@ -45,6 +47,7 @@ function onSubmit(event) {
         message: `Fulfilled promise in ${delay}ms`,
         color: '#59A10D',
         position: 'topRight',
+        iconUrl: `"${img1Url}"`,
         iconColor: 'white',
         messageColor: 'white',
         timeout: 4000,
@@ -58,6 +61,7 @@ function onSubmit(event) {
         message: `Rejected promise in ${delay}ms`,
         color: '#EF4040',
         position: 'topRight',
+        iconUrl: `"${img2Url}"`,
         iconColor: 'white',
         messageColor: 'white',
         timeout: 4000,

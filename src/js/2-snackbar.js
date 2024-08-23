@@ -3,30 +3,43 @@ import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
 
-const submitBtn = document.querySelector("button[type='submit']");
 const inputDelay = document.querySelector("input[name='delay']");
-
-const stateValue = document.querySelector("input[name='state']");
+inputDelay.classList.add('delay-input');
+inputDelay.setAttribute('step', '500');
+inputDelay.setAttribute('value', '');
+inputDelay.setAttribute('min', '500');
 const form = document.querySelector('.form');
-stateValue.classList.add('.promise-state');
-submitBtn.disabled = true;
-let delay = 0;
+
 function onSubmit(event) {
   event.preventDefault();
-  if (!inputDelay.value.trim() || !stateValue.value.trim()) {
-    submitBtn.disabled = true;
+  let isSuccess = null;
+  const delay = Number(inputDelay.value);
+  console.log(delay);
+  const getSelectedRadio = document.querySelector(
+    'input[name="state"]:checked'
+  );
+  if (delay <= 0) {
     return;
   } else {
-    delay = inputDelay.value;
-    submitBtn.disabled = true;
-    console.log(delay);
+    if (getSelectedRadio !== null) {
+      if (getSelectedRadio.value === 'fulfilled') {
+        isSuccess = true;
+      } else {
+        isSuccess = false;
+      }
+    }
   }
-}
-// let delay = inputDelay.value;
-// console.log(delay);
-const makePromise = new Promise(delay => {
-  setTimeout(() => {
-    if (stateValue.value === 'fulfilled') {
+
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (isSuccess) {
+        resolve(delay);
+      } else {
+        reject(delay);
+      }
+    }, delay);
+  })
+    .then(value => {
       iziToast.success({
         title: 'OK',
         message: `Fulfilled promise in ${delay}ms`,
@@ -35,10 +48,12 @@ const makePromise = new Promise(delay => {
         iconUrl: '/img/success.svg',
         iconColor: 'white',
         messageColor: 'white',
-        timeout: 3000,
+        timeout: 4000,
         titleColor: 'white',
+        progressBar: 'false',
       });
-    } else if (stateValue.value === 'rejected') {
+    })
+    .catch(error => {
       iziToast.error({
         title: 'Error',
         message: `Rejected promise in ${delay}ms`,
@@ -47,12 +62,12 @@ const makePromise = new Promise(delay => {
         iconUrl: '/img/xmark.svg',
         iconColor: 'white',
         messageColor: 'white',
-        timeout: 3000,
+        timeout: 4000,
         titleColor: 'white',
+        progressBar: 'false',
       });
-    }
-  }, delay);
-});
+    });
+  event.target.reset();
+}
 
-form.addEventListener('input', onSubmit);
-submitBtn.addEventListener('click', makePromise);
+form.addEventListener('submit', onSubmit);

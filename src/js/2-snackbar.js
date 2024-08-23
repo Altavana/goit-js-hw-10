@@ -59,8 +59,6 @@ function onSubmit(event) {
         message: `Rejected promise in ${delay}ms`,
         color: '#EF4040',
         position: 'topRight',
-        iconUrl:
-          'https://fontawesome.com/icons/circle-xmark?f=classic&s=regular',
         iconColor: 'white',
         messageColor: 'white',
         timeout: 4000,

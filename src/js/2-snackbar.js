@@ -45,7 +45,6 @@ function onSubmit(event) {
         message: `Fulfilled promise in ${delay}ms`,
         color: '#59A10D',
         position: 'topRight',
-        iconUrl: '../img/success.svg',
         iconColor: 'white',
         messageColor: 'white',
         timeout: 4000,

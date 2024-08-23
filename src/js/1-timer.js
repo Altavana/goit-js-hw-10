@@ -6,6 +6,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
+import img2Url from '/img/xmark.svg';
 const selectedDateItem = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('button[data-start]');
 const daysItem = document.querySelector('[data-days]');
@@ -34,7 +35,7 @@ function validateDates(selectedDates) {
       message: 'Please choose a date in the future',
       color: '#EF4040',
       position: 'topRight',
-      iconUrl: '/img/xmark.svg',
+      iconUrl: img2Url,
       iconColor: 'white',
       messageColor: 'white',
       timeout: 3000,
